@@ -2,12 +2,13 @@ package de.adito.aditoweb.nbm.filepreview;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.jetbrains.annotations.*;
-import org.openide.filesystems.FileObject;
+import org.openide.filesystems.*;
 import org.openide.loaders.DataObject;
 import org.openide.modules.Modules;
 import org.openide.nodes.Node;
-import org.openide.text.CloneableEditor;
+import org.openide.text.*;
 import org.openide.util.Lookup;
+import org.openide.util.lookup.Lookups;
 import org.openide.windows.*;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author w.glanzer, 11.10.2022
  */
-@TopComponent.Description(preferredID = PreviewTopComponent.TC_ID, persistenceType = TopComponent.PERSISTENCE_ONLY_OPENED)
+@TopComponent.Description(preferredID = PreviewTopComponent.TC_ID, persistenceType = TopComponent.PERSISTENCE_NEVER)
 @TopComponent.Registration(mode = "output", openAtStartup = false, position = 1000)
 public class PreviewTopComponent extends CloneableEditor
 {
@@ -31,7 +32,13 @@ public class PreviewTopComponent extends CloneableEditor
 
   public PreviewTopComponent()
   {
-    super(PreviewEditorSupport.create(null));
+    super(create(null), false);
+
+    // Remove Node from Lookup to prevent navigator change
+    associateLookup(Lookups.proxy(() -> {
+      Lookup lookup = _getLookupOfEditorSupport();
+      return lookup == null ? Lookup.EMPTY : Lookups.exclude(lookup, Node.class);
+    }));
   }
 
   @Override
@@ -129,6 +136,26 @@ public class PreviewTopComponent extends CloneableEditor
   }
 
   /**
+   * @return the current used lookup in the current editor support
+   */
+  @Nullable
+  private Lookup _getLookupOfEditorSupport()
+  {
+    CloneableEditorSupport ces = cloneableEditorSupport();
+
+    try
+    {
+      Field lookup = CloneableEditorSupport.class.getDeclaredField("lookup");
+      lookup.setAccessible(true);
+      return (Lookup) lookup.get(ces);
+    }
+    catch (Throwable e)
+    {
+      return null;
+    }
+  }
+
+  /**
    * Changes the underlying file of this top component
    *
    * @param pFile file to change to
@@ -140,17 +167,24 @@ public class PreviewTopComponent extends CloneableEditor
 
     try
     {
-      pane = null;
-      removeAll();
+      CloneableEditorSupport ces = create(pFile);
+      if (ces != null)
+      {
+        //Preserve activated nodes to prevent property sheet changes
+        setActivatedNodes(TopComponent.getRegistry().getActivatedNodes());
 
-      Field support = CloneableEditor.class.getDeclaredField("support");
-      support.setAccessible(true);
-      support.set(this, PreviewEditorSupport.create(pFile));
+        pane = null;
+        removeAll();
 
-      updateName();
+        Field support = CloneableEditor.class.getDeclaredField("support");
+        support.setAccessible(true);
+        support.set(this, ces);
 
-      super.componentOpened();
-      super.componentShowing();
+        updateName();
+
+        super.componentOpened();
+        super.componentShowing();
+      }
     }
     catch (Exception pE)
     {
@@ -158,4 +192,26 @@ public class PreviewTopComponent extends CloneableEditor
     }
   }
 
+  /**
+   * Creates a new editor support instance for the underlying file
+   *
+   * @param pFile file to get the support for
+   * @return the support or null if no support could be created
+   */
+  @Nullable
+  private static CloneableEditorSupport create(@Nullable FileObject pFile)
+  {
+    try
+    {
+      FileObject file = pFile != null ? pFile : FileUtil.createMemoryFileSystem().getRoot().createData("dummy.js");
+      DataObject dataObject = DataObject.find(file);
+      return dataObject.getLookup().lookup(CloneableEditorSupport.class);
+    }
+    catch (Throwable e)
+    {
+      // ignore
+    }
+
+    return null;
+  }
 }
