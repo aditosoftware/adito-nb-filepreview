@@ -10,7 +10,7 @@
 
   <groupId>de.adito.aditoweb.nbm</groupId>
   <artifactId>jspreview</artifactId>
-  <version>1.0.0</version>
+  <version>0.1.0</version>
   <packaging>nbm</packaging>
 
   <properties>
@@ -18,6 +18,23 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>de.adito.nb-modules</groupId>
+      <artifactId>de-adito-netbeans-utilities</artifactId>
+      <version>RELEASE125-1.9.3</version>
+    </dependency>
+    <dependency>
+      <groupId>de.adito.nb-modules</groupId>
+      <artifactId>nb-adito-interface</artifactId>
+      <version>1.9.4-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.adito.nbm</groupId>
+      <artifactId>de-adito-metrics-api</artifactId>
+      <version>RELEASE125-1.9.1</version>
+      <scope>provided</scope>
+    </dependency>
 
     <!-- NetBeans -->
     <dependency>
@@ -57,7 +74,27 @@
     </dependency>
     <dependency>
       <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-text</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
       <artifactId>org-openide-awt</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-loaders</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-modules</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-netbeans-swing-outline</artifactId>
       <version>${netbeans.version}</version>
     </dependency>
     <dependency>
@@ -69,6 +106,20 @@
       <groupId>org.netbeans.api</groupId>
       <artifactId>org-netbeans-modules-projectuiapi-base</artifactId>
       <version>${netbeans.version}</version>
+    </dependency>
+
+    <!-- RXJava -->
+    <dependency>
+      <groupId>io.reactivex.rxjava3</groupId>
+      <artifactId>rxjava</artifactId>
+      <version>3.1.4</version>
+    </dependency>
+
+    <!-- Guava -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>31.1-jre</version>
     </dependency>
 
     <!--  NotNull/Nullable annotations  -->
