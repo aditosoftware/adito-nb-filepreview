@@ -1,4 +1,4 @@
-package de.adito.aditoweb.nbm.jspreview;
+package de.adito.aditoweb.nbm.filepreview;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.jetbrains.annotations.*;
@@ -26,7 +26,7 @@ public class PreviewTopComponent extends CloneableEditor
 
   public static final String TC_ID = "ADITOPreview"; //NOI18N
   protected static final PreviewTopComponent INSTANCE = new PreviewTopComponent();
-  private static final String _NAME = "JS Preview";
+  private static final String _NAME = "File Preview";
   private final CompositeDisposable disposable = new CompositeDisposable();
 
   public PreviewTopComponent()

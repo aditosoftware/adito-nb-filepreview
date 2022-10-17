@@ -1,4 +1,4 @@
-package de.adito.aditoweb.nbm.jspreview;
+package de.adito.aditoweb.nbm.filepreview;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;

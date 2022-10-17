@@ -1,4 +1,4 @@
-package de.adito.aditoweb.nbm.jspreview;
+package de.adito.aditoweb.nbm.filepreview;
 
 import org.jetbrains.annotations.*;
 import org.openide.filesystems.*;

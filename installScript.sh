@@ -12,7 +12,7 @@
 
 # name of the jar file to be moved. Example of the git plugin:
 # jarFile="de-adito-git-adito-nbm-git.jar"
-jarFile="de-adito-aditoweb-nbm-jspreview.jar"
+jarFile="de-adito-aditoweb-nbm-filepreview.jar"
 # path to the jar file above, from the location of this script. Example of the git plugin (Note that the git plugin builds the nbm in a submodule,
 # path probably starts with target/...):
 # jarPath="nbm/target/nbm/netbeans/extra/modules/"
@@ -22,7 +22,7 @@ jarPath="target/nbm/netbeans/extra/modules/"
 jarTargetPath="../designer/workingdir/nbp_userdir/modules/"
 # name of the folder that contains the gathered dependencies of the plugin. These have to be moved as well. Example of the git plugin:
 # folderName="de.adito.git.adito-nbm-git/"
-folderName="de.adito.aditoweb.nbm.jspreview"
+folderName="de.adito.aditoweb.nbm.filepreview"
 # path to the folder containing the gathered dependencies, as seen from the location of the script. Example of the git plugin:
 # folderPath="nbm/target/nbm/netbeans/extra/modules/ext/"
 folderPath="target/nbm/netbeans/extra/modules/ext/"

@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 AutoUpdate-Show-In-Client: true
-OpenIDE-Module-Name: JavaScript Preview
+OpenIDE-Module-Name: File Preview
 OpenIDE-Module-Display-Category: ADITO / Editors
-OpenIDE-Module-Short-Description: Provides a quick preview for javascript files in current editor context
-OpenIDE-Module-Long-Description: Provides a quick preview for javascript files in current editor context
+OpenIDE-Module-Short-Description: Provides a quick preview for files in current selection context
+OpenIDE-Module-Long-Description: Provides a quick preview for files in current selection context
