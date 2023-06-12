@@ -3,6 +3,7 @@ package de.adito.aditoweb.nbm.filepreview;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import lombok.NonNull;
 import org.jetbrains.annotations.*;
 import org.openide.util.WeakListeners;
 import org.openide.windows.TopComponent;
@@ -58,7 +59,7 @@ public class PropertySheetConnector implements Disposable
   /**
    * @return Observable to listen on the current selection in the property sheet
    */
-  @NotNull
+  @NonNull
   public Observable<Optional<Object>> observeSelection()
   {
     return currentSelection
