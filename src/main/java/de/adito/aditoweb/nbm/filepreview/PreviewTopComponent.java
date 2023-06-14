@@ -1,6 +1,7 @@
 package de.adito.aditoweb.nbm.filepreview;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import lombok.NonNull;
 import org.jetbrains.annotations.*;
 import org.openide.filesystems.*;
 import org.openide.loaders.DataObject;
@@ -108,7 +109,7 @@ public class PreviewTopComponent extends CloneableEditor
    * @return the fo or null, if no fo was found
    */
   @Nullable
-  private FileObject _findFileObjectInProperty(@NotNull Node.Property<?> pProperty)
+  private FileObject _findFileObjectInProperty(@NonNull Node.Property<?> pProperty)
   {
     try
     {
